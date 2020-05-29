@@ -1,0 +1,28 @@
+@page
+@model dimabeCRUD.Pages.Roles.DeleteModel
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<h1>Borrar</h1>
+
+<h3>¿Estás de acuerdo borrando esta entrada?</h3>
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Role.Id" />
+        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> BORRAR</button>
+        <a class="btn btn-success" asp-page="./Index"><i class="fas fa-undo-alt"></i> CANCELAR</a>
+    </form>
+</div>

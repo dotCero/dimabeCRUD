@@ -1,0 +1,30 @@
+@page
+@model dimabeCRUD.Pages.RoleUsers.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Roles de Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleUser.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleUser.Role.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleUser.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleUser.User.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success btn-sm" asp-page="./Index"><i class="fas fa-undo-alt"></i> Lista</a>
+</div>

@@ -1,0 +1,85 @@
+@page
+@model dimabeCRUD.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a class="btn btn-success btn-sm" asp-page="Create"><i class="fas fa-plus-square"></i> Crear Nuevo</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input type="text" name="search" value="@Model.Filter" />
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+            <a class="btn btn-info btn-sm" asp-page="./Index">Todos</a>
+        </p>
+    </div>
+</form>
+
+<table class="table table-hover table-success table-sm">
+    <thead>
+    <tr>
+        <th>
+            <a asp-page="./Index" asp-route-order="@Model.SortByName" asp-route-filter="@Model.Filter">
+                @Html.DisplayNameFor(model => model.Users[0].FullName)
+            </a>
+        </th>
+            
+        <th>
+            <a asp-page="./Index" asp-route-order="@Model.SortByEMail" asp-route-filter="@Model.Filter">
+                @Html.DisplayNameFor(model => model.Users[0].Email)
+            </a>
+        </th>
+            
+        <th>
+            <a asp-page="./Index" asp-route-order="@Model.SortByDate" asp-route-filter="@Model.Filter">
+                @Html.DisplayNameFor(model => model.Users[0].RegistrationDate)
+            </a>
+        </th>
+        <th>Opciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Users) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                <span title="Detalles" data-toggle="tooltip"><a class="btn btn-info btn-sm" asp-page="./Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a></span>
+                <span title="Editar" data-toggle="tooltip"><a class="btn btn-warning btn-sm" asp-page="./Edit" asp-route-id="@item.Id"><i class="far fa-edit"></i></a></span>
+                <span title="Borrar" data-toggle="tooltip"><a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt"></i></a></span>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@{
+    var priorDis = !Model.Users.HasPreviousPage ? "disabled" : "";
+    var nextDis = !Model.Users.HasNextPage ? "disabled" : "";
+}
+
+<div text-align="right">
+    <a asp-page="./Index"
+       asp-route-order="@Model.Sort" asp-route-indexPage="@(Model.Users.IndexPage - 1)" asp-route-filter="@Model.Filter" class="btn btn-primary  @priorDis">
+       <i class="fas fa-chevron-left"></i>
+    </a>
+    <a asp-page="./Index"
+       asp-route-order="@Model.Sort" asp-route-indexPage="@(Model.Users.IndexPage + 1)" asp-route-filter="@Model.Filter" class="btn btn-primary @nextDis">
+       <i class="fas fa-chevron-right"></i>
+    </a>
+</div>

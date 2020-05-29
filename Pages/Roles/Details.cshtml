@@ -1,0 +1,25 @@
+@page
+@model dimabeCRUD.Pages.Roles.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <span title="Editar" data-toggle="tooltip"><a class="btn btn-warning btn-sm" asp-page="./Edit" asp-route-id="@Model.Role.Id"><i class="far fa-edit"></i></a></span>
+    <a class="btn btn-success btn-sm" asp-page="./Index"><i class="fas fa-undo-alt"></i> Lista</a>
+</div>

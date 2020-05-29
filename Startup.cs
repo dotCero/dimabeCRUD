@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using dimabeCRUD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace dimabeCRUD
 {
@@ -24,6 +26,18 @@ namespace dimabeCRUD
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            
+            /*CONEXIÓN A SQL SERVER*/
+            
+            /*services.AddDbContext<DimabeCrudContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DimabeCrudContext")));*/
+            
+            /*CONEXIÓN A SQLITE*/
+            
+            services.AddDbContext<DimabeCrudContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DimabeCrudContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

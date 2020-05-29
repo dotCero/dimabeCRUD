@@ -1,0 +1,51 @@
+@page
+@model dimabeCRUD.Pages.Users.DeleteModel
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<h1>Borrar</h1>
+
+<h3>¿Estás de acuerdo borrando esta entrada?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.RegistrationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.RegistrationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.RoleUsers)
+        </dt>
+        <dd class="col-sm-2">
+            @foreach (var item in Model.User.RoleUsers)
+            {
+                @Html.DisplayFor(modelItem => item.Role.NameForList)
+            }
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="User.Id" />
+        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> BORRAR</button>
+        <a class="btn btn-success" asp-page="./Index"><i class="fas fa-undo-alt"></i> CANCELAR</a>
+    </form>
+</div>

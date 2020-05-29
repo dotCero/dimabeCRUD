@@ -1,0 +1,72 @@
+@page
+@model dimabeCRUD.Pages.RoleUsers.IndexModel
+
+@{
+    ViewData["Title"] = "Roles de Usuario";
+}
+
+<h1>Roles de Usuario</h1>
+
+<p>
+    <a class="btn btn-success btn-sm" asp-page="Create"><i class="fas fa-plus-square"></i> Asignar Nuevo</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input type="text" name="search" value="@Model.Filter" />
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+            <a class="btn btn-info btn-sm" asp-page="./Index">Todos</a>
+        </p>
+    </div>
+</form>
+
+<table class="table table-hover table-success table-sm">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-order="@Model.SortByRole" asp-route-filter="@Model.Filter">
+                    @Html.DisplayNameFor(model => model.RoleUsers[0].Role)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-order="@Model.SortByUser" asp-route-filter="@Model.Filter">
+                    @Html.DisplayNameFor(model => model.RoleUsers[0].User)
+                </a>
+            </th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RoleUsers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                <span title="Detalles" data-toggle="tooltip"><a class="btn btn-info btn-sm" asp-page="./Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a></span>
+                <span title="Borrar" data-toggle="tooltip"><a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt"></i></a></span>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var priorDis = !Model.RoleUsers.HasPreviousPage ? "disabled" : "";
+    var nextDis = !Model.RoleUsers.HasNextPage ? "disabled" : "";
+}
+
+<div text-align="right">
+    <a asp-page="./Index"
+       asp-route-order="@Model.Sort" asp-route-indexPage="@(Model.RoleUsers.IndexPage - 1)" asp-route-filter="@Model.Filter" class="btn btn-primary  @priorDis">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    <a asp-page="./Index"
+       asp-route-order="@Model.Sort" asp-route-indexPage="@(Model.RoleUsers.IndexPage + 1)" asp-route-filter="@Model.Filter" class="btn btn-primary @nextDis">
+        <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
